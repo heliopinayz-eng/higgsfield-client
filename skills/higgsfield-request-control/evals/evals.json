@@ -1,0 +1,13 @@
+[
+ {"name": "missing request_id fails with usage error, not a stack trace",
+  "cmd": ["python3", "higgsfield-request-control/higgsfield_request_control.py", "status"],
+  "expect_exit": 2, "expect_substr": "request_id"},
+
+ {"name": "unknown action is rejected before any network call",
+  "cmd": ["python3", "higgsfield-request-control/higgsfield_request_control.py", "delete", "req-123"],
+  "expect_exit": 2, "expect_substr": "invalid choice"},
+
+ {"name": "missing higgsfield_client dependency reports a clear install hint, not ImportError trace",
+  "cmd": ["python3", "-c", "import subprocess,sys; r=subprocess.run(['python3','higgsfield-request-control/higgsfield_request_control.py','status','req-123'],capture_output=True,text=True,env={'PATH':'/usr/bin:/bin'}); assert r.returncode==1,r; assert 'pip install higgsfield-client' in r.stderr,r.stderr; print('clean dependency error')"],
+  "expect_exit": 0, "expect_substr": "clean dependency error"}
+]
