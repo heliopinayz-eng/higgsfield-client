@@ -15,6 +15,11 @@ Check status, fetch result, or cancel a Higgsfield API request by
 For when a worker already holds a `request_id` from an earlier `submit`
 call and needs one-shot control over it.
 
+Model-agnostic: `request_id` alone identifies the request server-side —
+no model/endpoint argument needed here. Works the same for any Higgsfield
+model (e.g. `bytedance/seedance-2.5/text-to-video`, `minimax/h3/reference-to-video`,
+or any future one) as long as it was created via `submit`.
+
 ## Commands
 
 ```bash
